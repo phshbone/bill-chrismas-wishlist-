@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#14321f">
+  <title>Family Christmas Wishlist</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div class="hero-kicker">HO-HO-Holiday</div>
+      <h1>Christmas Wishlist</h1>
+      <p id="statusText" class="status-text" aria-live="polite">Loading family workshop…</p>
+    </header>
+
+    <section id="backendNotice" class="notice hidden" data-testid="backend-notice"></section>
+
+    <section id="authView" class="view" data-testid="auth-view">
+      <h2>Who are you?</h2>
+      <div id="memberPicker" class="member-grid" data-testid="member-picker"></div>
+
+      <form id="authForm" class="panel hidden" autocomplete="on" data-testid="auth-form">
+        <button type="button" id="authBack" class="text-button">← Choose someone else</button>
+        <h3 id="authTitle">Welcome</h3>
+        <p id="authHelp"></p>
+
+        <label id="setupCodeLabel" class="field hidden">
+          <span>One-time setup code</span>
+          <input id="setupCode" inputmode="numeric" autocomplete="one-time-code">
+        </label>
+
+        <label class="field">
+          <span id="passwordLabel">Password</span>
+          <input id="password" type="password" minlength="6" autocomplete="current-password" required>
+        </label>
+
+        <button class="primary" type="submit" id="authSubmit">Continue</button>
+      </form>
+    </section>
+
+    <section id="homeView" class="view hidden" data-testid="home-view">
+      <nav class="toolbar">
+        <button id="homeButton" class="text-button">Family</button>
+        <button id="shoppingButton" class="text-button">My Shopping List</button>
+        <button id="adminButton" class="text-button hidden">Members</button>
+        <button id="logoutButton" class="text-button">Log out</button>
+      </nav>
+
+      <div id="homePanel">
+        <h2>Family workshop</h2>
+        <p class="subtle">Tap an elf to open their wishlist.</p>
+        <div id="familyGrid" class="member-grid" data-testid="family-grid"></div>
+      </div>
+
+      <div id="wishlistPanel" class="hidden">
+        <button id="wishlistBack" class="text-button">← Back to family</button>
+        <div class="section-heading">
+          <div>
+            <h2 id="wishlistTitle">Wishlist</h2>
+            <p id="wishlistMode" class="subtle"></p>
+          </div>
+          <button id="addWishButton" class="primary compact hidden">Add wish</button>
+        </div>
+
+        <form id="wishForm" class="panel hidden" data-testid="wish-form">
+          <input type="hidden" id="wishId">
+          <label class="field">
+            <span>Gift</span>
+            <input id="wishTitle" maxlength="200" required>
+          </label>
+          <label class="field">
+            <span>Link <small>(optional)</small></span>
+            <input id="wishUrl" type="url" inputmode="url">
+          </label>
+          <label class="field">
+            <span>Notes <small>(size, color, etc.)</small></span>
+            <textarea id="wishNotes" maxlength="1200" rows="3"></textarea>
+          </label>
+          <div class="button-row">
+            <button type="submit" class="primary">Save wish</button>
+            <button type="button" id="cancelWish" class="secondary">Cancel</button>
+          </div>
+        </form>
+
+        <div id="wishList" class="wish-list" data-testid="wish-list"></div>
+      </div>
+
+      <div id="shoppingPanel" class="hidden">
+        <button id="shoppingBack" class="text-button">← Back to family</button>
+        <h2>My Shopping List</h2>
+        <p class="subtle">Only you can see the gifts you reserved or purchased.</p>
+        <div id="shoppingList" class="wish-list" data-testid="shopping-list"></div>
+      </div>
+
+      <div id="adminPanel" class="hidden">
+        <button id="adminBack" class="text-button">← Back to family</button>
+        <div class="section-heading">
+          <div>
+            <h2>Family Members</h2>
+            <p class="subtle">Access management only. Admin cannot see private gift claims.</p>
+          </div>
+          <button id="addMemberButton" class="primary compact">Add member</button>
+        </div>
+
+        <form id="memberForm" class="panel hidden">
+          <label class="field">
+            <span>Name</span>
+            <input id="newMemberName" maxlength="60" required>
+          </label>
+          <label class="field">
+            <span>Short key <small>(optional)</small></span>
+            <input id="newMemberKey" maxlength="40" pattern="[a-z0-9-]+">
+          </label>
+          <div class="button-row">
+            <button class="primary" type="submit">Add member</button>
+            <button id="cancelMember" class="secondary" type="button">Cancel</button>
+          </div>
+        </form>
+
+        <div id="inviteResult" class="notice hidden" aria-live="polite"></div>
+        <div id="adminList" class="wish-list"></div>
+      </div>
+    </section>
+
+    <footer class="footer">Blind gifting: recipients never receive claim information.</footer>
+  </main>
+
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
