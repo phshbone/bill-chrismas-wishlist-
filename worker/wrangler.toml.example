@@ -1,0 +1,15 @@
+name = "bill-christmas-wishlist-api"
+main = "src/index.js"
+compatibility_date = "2026-09-21"
+
+[vars]
+FRONTEND_ORIGIN = "https://phshbone.github.io"
+SESSION_DAYS = "180"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "bill-christmas-wishlist"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+# Configure BOOTSTRAP_ADMIN_CODE as a Worker secret in Cloudflare.
+# Do not commit the real code to GitHub.
